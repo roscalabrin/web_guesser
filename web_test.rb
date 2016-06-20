@@ -13,7 +13,6 @@ def check_guess(guess, number)
   'Take a guess'
   if guess.nil?
     "Take a guess"
-    "take a guess"
   elsif guess.to_i > number + 5 && guess.to_i <= 100
     "Way too high"
     "take a guess"

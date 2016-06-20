@@ -1,8 +1,17 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
+set :newgame, SECRET_NUMBER = rand(100)
+
+get '/newgame' do
   SECRET_NUMBER = rand(100)
   @@guess_counter = 5
+  redirect to('/')
+end
+
+  # SECRET_NUMBER = rand(100)
+  # @@guess_counter = 5
+  #
 
 get '/' do
   guess = params["guess"]
@@ -15,7 +24,8 @@ get '/' do
 end
 
 def check_guess(guess, number)
-  if @@guess_counter <= 1 
+  if @@guess_counter <= 1 && guess.to_i != number
+    @@guess_counter = 0
     "The SECRET NUMBER was #{number}"
   else
     if guess.nil?
@@ -71,7 +81,7 @@ def way_low
 end
 
 def correct(number)
-  @@guess_counter -= 1
+  @@guess_counter = 0
   @color ='#008b00'
   "You got it right!\nThe SECRET NUMBER is #{number}"
 end
