@@ -1,15 +1,17 @@
-
-
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
   </head>
-  <body>
+  <body style= "background-color: <%= color %>" >
     <p>
-      "The SECRET NUMBER is <%= number %>
+      <%= message %>
     </p>
-
+    <form>
+      <input type='text' name='guess' />
+      <input type='submit' value='Guess!' />
+    </form>
+  </div>
   </body>
 </html>
