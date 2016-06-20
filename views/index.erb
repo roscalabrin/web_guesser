@@ -6,7 +6,8 @@
   </head>
   <body style= "background-color: <%= color %>" >
     <p>
-      <%= message %>
+      <%= cheat_secret %>
+      <%= message if cheat == nil %>
       <br>
       <%= guess_available if guess_counter > 0 %>
     </p>

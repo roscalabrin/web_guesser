@@ -1,26 +1,28 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-set :newgame, SECRET_NUMBER = rand(100)
-
 get '/newgame' do
   SECRET_NUMBER = rand(100)
   @@guess_counter = 5
   redirect to('/')
 end
 
-  # SECRET_NUMBER = rand(100)
-  # @@guess_counter = 5
-  #
-
 get '/' do
+  cheat = params['cheat']
+  cheat_secret = check_cheat_option(cheat)
   guess = params["guess"]
   number = SECRET_NUMBER
   message = check_guess(guess, number)
   color = @color
   guess_counter = @@guess_counter
   guess_available = calculate_guesses_available(guess_counter)
-  erb :index, :locals => {:number => number, :message => message, :color => color, :guess_available => guess_available, :guess_counter => guess_counter}
+  erb :index, :locals => {:number => number, :message => message, :color => color, :guess_available => guess_available, :guess_counter => guess_counter, :cheat_secret => cheat_secret, :cheat => cheat}
+end
+
+def check_cheat_option(cheat)
+  if cheat.to_s == 'true'
+    "The SECRET NUMBER is #{SECRET_NUMBER}"
+  end
 end
 
 def check_guess(guess, number)
